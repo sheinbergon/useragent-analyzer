@@ -3,8 +3,6 @@ package org.sheinbergon.useragent.cache;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.sheinbergon.useragent.Ingredients;
-import org.sheinbergon.useragent.cache.impl.AsyncCaffeineCache;
-import org.sheinbergon.useragent.cache.impl.AsyncPseudoCache;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -34,16 +32,6 @@ public abstract class AsyncCache {
                     return CompletableFuture.runAsync(() -> cache.write(raw, ingredients));
                 }
             };
-        }
-    }
-
-    public static class Builders {
-        public static AsyncPseudoCache.Builder psuedo() {
-            return AsyncPseudoCache.builder();
-        }
-
-        public static AsyncCaffeineCache.Builder caffeine() {
-            return AsyncCaffeineCache.builder();
         }
     }
 }

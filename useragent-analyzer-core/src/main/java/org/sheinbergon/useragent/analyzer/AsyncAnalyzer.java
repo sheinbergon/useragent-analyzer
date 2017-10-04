@@ -8,7 +8,7 @@ import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
 import org.sheinbergon.useragent.analyzer.impl.UaParserJsAsyncAnalyzer;
 import org.sheinbergon.useragent.cache.AsyncCache;
-import org.sheinbergon.useragent.cache.impl.PseudoCache;
+import org.sheinbergon.useragent.cache.impl.AsyncPseudoCache;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -46,7 +46,7 @@ public abstract class AsyncAnalyzer<INGESTION> {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     protected static abstract class Builder<IMPL extends Builder<IMPL>> {
 
-        protected AsyncCache cache = PseudoCache.builder().buildAsync();
+        protected AsyncCache cache = AsyncPseudoCache.builder().build();
 
         public IMPL cache(AsyncCache cache) {
             this.cache = cache;
@@ -57,7 +57,7 @@ public abstract class AsyncAnalyzer<INGESTION> {
 
         public abstract AsyncAnalyzer build();
     }
-    
+
     @Override
     public void finalize() {
         this.teardown();

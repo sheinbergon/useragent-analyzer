@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>useragent-analyzer</artifactId>
+        <groupId>org.sheinbergon</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>useragent-analyzer-caffeine</artifactId>
+
+    <properties>
+        <caffeine.version>2.5.5</caffeine.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>${caffeine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sheinbergon</groupId>
+            <artifactId>useragent-analyzer-core</artifactId>
+            <version>${version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

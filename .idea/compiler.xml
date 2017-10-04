@@ -6,11 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="useragent-analyzer" />
+        <module name="useragent-analyzer-caffeine" />
+        <module name="useragent-analyzer-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="useragent-analyzer" target="1.8" />
+      <module name="useragent-analyzer-caffeine" target="1.8" />
+      <module name="useragent-analyzer-core" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

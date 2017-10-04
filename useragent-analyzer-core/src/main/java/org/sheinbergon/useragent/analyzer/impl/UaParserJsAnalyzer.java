@@ -64,7 +64,7 @@ public class UaParserJsAnalyzer extends Analyzer<UaParserJsIngestion> {
         private int v8RuntimeInstances = 10;
 
         @Override
-        protected UaParserJsAnalyzer.Builder getSelf() {
+        protected Builder getSelf() {
             return this;
         }
 

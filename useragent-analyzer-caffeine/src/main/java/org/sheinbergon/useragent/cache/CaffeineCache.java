@@ -1,4 +1,4 @@
-package org.sheinbergon.useragent.cache.impl;
+package org.sheinbergon.useragent.cache;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.AccessLevel;
