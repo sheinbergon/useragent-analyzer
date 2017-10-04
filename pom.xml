@@ -6,9 +6,9 @@
     <artifactId>useragent-analyzer</artifactId>
     <version>0.0.1</version>
     <modules>
-        <module>useragent-analyzer-caffeine</module>
-        <module>useragent-analyzer-core</module>
-        <module>useragent-analyzer-uaparserjs</module>
+        <module>core</module>
+        <module>caffeine</module>
+        <module>uaparserjs</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -19,7 +19,7 @@
         <lombok.version>1.16.18</lombok.version>
     </properties>
 
-    <name>UserAgent Analyzer</name>
+    <name>useragent-analyzer</name>
     <description>A non-opinionated User-Agent analysis proxy written in Java 8</description>
     <url>https://github.com/sheinbergon/useragent-analyzer</url>
 

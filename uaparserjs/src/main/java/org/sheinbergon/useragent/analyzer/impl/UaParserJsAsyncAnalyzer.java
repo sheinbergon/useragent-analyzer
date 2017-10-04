@@ -2,6 +2,7 @@ package org.sheinbergon.useragent.analyzer.impl;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.sheinbergon.useragent.Ingredients;
@@ -11,7 +12,6 @@ import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
 import org.sheinbergon.useragent.analyzer.impl.util.UaParserJsUtils;
 import org.sheinbergon.useragent.analyzer.impl.util.V8Pool;
-import org.sheinbergon.useragent.cache.AsyncCache;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 /**
  * @author Idan Sheinberg
  */
-
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class UaParserJsAsyncAnalyzer extends AsyncAnalyzer<UaParserJsIngestion> {
 
     public static Builder builder() {
@@ -33,14 +33,6 @@ public class UaParserJsAsyncAnalyzer extends AsyncAnalyzer<UaParserJsIngestion> 
     private final ExecutorService v8AllocationExecutor;
     private final ExecutorService v8ExecutionExecutor;
     private final ExecutorService deserializationExecutor;
-
-    private UaParserJsAsyncAnalyzer(AsyncCache cache, V8Pool v8Pool, ExecutorService v8AllocationExecutor, ExecutorService v8ExecutionExecutor, ExecutorService jacksonDeserializationExecutor) {
-        super(cache);
-        this.v8Pool = v8Pool;
-        this.v8AllocationExecutor = v8AllocationExecutor;
-        this.v8ExecutionExecutor = v8ExecutionExecutor;
-        this.deserializationExecutor = jacksonDeserializationExecutor;
-    }
 
     @Override
     public void teardown() {
@@ -73,7 +65,7 @@ public class UaParserJsAsyncAnalyzer extends AsyncAnalyzer<UaParserJsIngestion> 
 
     @Accessors(chain = true, fluent = true)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Builder extends AsyncAnalyzer.Builder<Builder> {
+    public static class Builder extends AsyncAnalyzer.Builder {
 
         @Setter
         private int v8RuntimeInstances = 10;
@@ -84,10 +76,6 @@ public class UaParserJsAsyncAnalyzer extends AsyncAnalyzer<UaParserJsIngestion> 
         @Setter
         private int deserializationConcurrency = 4;
 
-        @Override
-        protected Builder getSelf() {
-            return this;
-        }
 
         @Override
         public UaParserJsAsyncAnalyzer build() {
@@ -99,7 +87,7 @@ public class UaParserJsAsyncAnalyzer extends AsyncAnalyzer<UaParserJsIngestion> 
                 ExecutorService v8ExecutionExecutor = Executors.newFixedThreadPool(v8ExecutionConcurrency);
                 ExecutorService deserializationExecutor = Executors.newFixedThreadPool(deserializationConcurrency);
 
-                return new UaParserJsAsyncAnalyzer(cache, v8Pool, v8AllocationExecutor, v8ExecutionExecutor, deserializationExecutor);
+                return new UaParserJsAsyncAnalyzer(v8Pool, v8AllocationExecutor, v8ExecutionExecutor, deserializationExecutor);
             } catch (RuntimeException x) {
                 throw new AnalyzerBuildException(String.format("Could not build %s instance", UaParserJsAsyncAnalyzer.class), x);
             }
