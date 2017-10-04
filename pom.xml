@@ -8,6 +8,7 @@
     <modules>
         <module>useragent-analyzer-caffeine</module>
         <module>useragent-analyzer-core</module>
+        <module>useragent-analyzer-uaparserjs</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -15,11 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <j2v8.version>4.6.0</j2v8.version>
         <lombok.version>1.16.18</lombok.version>
-        <commonsio.version>2.5</commonsio.version>
-        <commonspool2.version>2.4.2</commonspool2.version>
-        <jackson.version>2.9.0</jackson.version>
     </properties>
 
     <name>UserAgent Analyzer</name>
@@ -102,7 +99,6 @@
             </plugin>
         </plugins>
     </build>
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -110,38 +106,5 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-            <version>${commonspool2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commonsio.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
     </dependencies>
-    <profiles>
-        <profile>
-            <id>linux</id>
-            <activation>
-                <os>
-                    <family>Linux</family>
-                    <arch>x64</arch>
-                </os>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.eclipsesource.j2v8</groupId>
-                    <artifactId>j2v8_linux_x86_64</artifactId>
-                    <version>${j2v8.version}</version>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 </project>

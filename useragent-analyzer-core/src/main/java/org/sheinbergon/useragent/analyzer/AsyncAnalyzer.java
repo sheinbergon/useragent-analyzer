@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.sheinbergon.useragent.Ingredients;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
-import org.sheinbergon.useragent.analyzer.impl.UaParserJsAsyncAnalyzer;
 import org.sheinbergon.useragent.cache.AsyncCache;
 import org.sheinbergon.useragent.cache.impl.AsyncPseudoCache;
 
@@ -61,11 +60,5 @@ public abstract class AsyncAnalyzer<INGESTION> {
     @Override
     public void finalize() {
         this.teardown();
-    }
-
-    public static class Builders {
-        public static UaParserJsAsyncAnalyzer.Builder uaParserJs() {
-            return UaParserJsAsyncAnalyzer.builder();
-        }
     }
 }

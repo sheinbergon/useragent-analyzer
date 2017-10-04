@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.sheinbergon</groupId>
             <artifactId>useragent-analyzer-core</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
