@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.sheinbergon.useragent.Ingredients;
-import org.sheinbergon.useragent.cache.AsyncCache;
 import org.sheinbergon.useragent.cache.Cache;
 
 import java.util.Optional;
@@ -61,11 +60,6 @@ public class CaffeineCache extends Cache {
             CaffeineCache cache = new CaffeineCache(maxEntries);
             cache.setup();
             return cache;
-        }
-
-        @Override
-        public AsyncCache buildAsync() {
-            return AsyncCache.wrap(build());
         }
     }
 }

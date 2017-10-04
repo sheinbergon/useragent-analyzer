@@ -3,7 +3,6 @@ package org.sheinbergon.useragent.cache.impl;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.sheinbergon.useragent.Ingredients;
-import org.sheinbergon.useragent.cache.AsyncCache;
 import org.sheinbergon.useragent.cache.Cache;
 
 import java.util.Optional;
@@ -26,15 +25,9 @@ public class PseudoCache extends Cache {
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Builder extends Cache.Builder {
-
         @Override
         public Cache build() {
             return new PseudoCache();
-        }
-
-        @Override
-        public AsyncCache buildAsync() {
-            return AsyncCache.wrap(build());
         }
     }
 }

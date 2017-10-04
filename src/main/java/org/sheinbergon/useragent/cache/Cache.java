@@ -20,8 +20,6 @@ public abstract class Cache {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     protected static abstract class Builder {
         public abstract Cache build();
-
-        public abstract AsyncCache buildAsync();
     }
 
     public static class Builders {
