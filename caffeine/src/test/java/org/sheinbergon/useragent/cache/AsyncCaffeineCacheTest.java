@@ -13,7 +13,7 @@ import static org.sheinbergon.useragent.cache.TestUtils.*;
 
 public class AsyncCaffeineCacheTest {
 
-    private final static long FUTURE_WAIT_TIMEOUT = 50L;
+    private final static long FUTURE_WAIT_TIMEOUT = 100L;
 
     @Before
     public void setup() {
