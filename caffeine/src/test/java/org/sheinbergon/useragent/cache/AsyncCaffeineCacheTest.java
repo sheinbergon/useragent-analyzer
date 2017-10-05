@@ -5,15 +5,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
 import static org.sheinbergon.useragent.cache.TestUtils.*;
 
 public class AsyncCaffeineCacheTest {
-
-    private final static long FUTURE_WAIT_TIMEOUT = 200L;
 
     @Before
     public void setup() {
@@ -32,7 +29,7 @@ public class AsyncCaffeineCacheTest {
                     assertTrue(optional.isPresent());
                     assertEquals(optional.get(), TEST_INGREDIENTS_1);
                 })
-                .get(FUTURE_WAIT_TIMEOUT, TimeUnit.MILLISECONDS);
+                .get();
     }
 
     @Test
@@ -42,7 +39,7 @@ public class AsyncCaffeineCacheTest {
                 .thenRun(Unchecked.runnable(() -> Thread.sleep(EVICTION_DELAY)))
                 .thenCompose(unit -> cache.read(TEST_KEY_1))
                 .thenAccept(optional -> assertFalse(optional.isPresent()))
-                .get(FUTURE_WAIT_TIMEOUT, TimeUnit.MILLISECONDS);
+                .get();
 
     }
 }
