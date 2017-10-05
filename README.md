@@ -1,4 +1,5 @@
 # useragent-analyzer
+[![Build Status](https://travis-ci.org/sheinbergon/governator-vault.svg?branch=master)](https://travis-ci.org/sheinbergon/useragent-analyzer)
 
 A non-opinionated User-Agent analysis proxy written in Java 8.
 
