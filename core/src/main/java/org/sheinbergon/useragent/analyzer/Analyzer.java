@@ -2,7 +2,6 @@ package org.sheinbergon.useragent.analyzer;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.sheinbergon.useragent.Ingredients;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
@@ -29,10 +28,9 @@ public abstract class Analyzer<INGESTION> {
     public abstract void teardown();
 
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    protected static abstract class Builder {
-        public abstract Analyzer build();
+    protected static abstract class Builder<INGESTION, A extends Analyzer<INGESTION>> {
+        public abstract A build();
     }
-
 
     @Override
     public void finalize() {

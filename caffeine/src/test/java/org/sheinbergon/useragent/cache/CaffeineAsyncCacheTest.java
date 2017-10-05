@@ -10,16 +10,16 @@ import java.util.concurrent.TimeoutException;
 import static org.junit.Assert.*;
 import static org.sheinbergon.useragent.cache.TestUtils.*;
 
-public class AsyncCaffeineCacheTest {
+public class CaffeineAsyncCacheTest {
 
     @Before
     public void setup() {
-        cache = AsyncCaffeineCache.builder()
+        cache = CaffeineAsyncCache.builder()
                 .maxEntries(CACHE_SIZE)
                 .build();
     }
 
-    private AsyncCaffeineCache cache = null;
+    private CaffeineAsyncCache cache = null;
 
     @Test
     public void verifyCacheInsertion() throws ExecutionException, TimeoutException, InterruptedException {

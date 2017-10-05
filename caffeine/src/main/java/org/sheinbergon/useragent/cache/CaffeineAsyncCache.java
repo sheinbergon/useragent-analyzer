@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
  * @author Idan Sheinberg
  */
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class AsyncCaffeineCache extends AsyncCache {
+public class CaffeineAsyncCache extends AsyncCache {
 
     public static Builder builder() {
         return new Builder();
@@ -48,14 +48,14 @@ public class AsyncCaffeineCache extends AsyncCache {
 
     @Accessors(chain = true, fluent = true)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Builder extends AsyncCache.Builder<AsyncCaffeineCache> {
+    public static class Builder extends AsyncCache.Builder<CaffeineAsyncCache> {
 
         @Setter
         private int maxEntries = 100000;
 
         @Override
-        public AsyncCaffeineCache build() {
-            AsyncCaffeineCache cache = new AsyncCaffeineCache(maxEntries);
+        public CaffeineAsyncCache build() {
+            CaffeineAsyncCache cache = new CaffeineAsyncCache(maxEntries);
             cache.setup();
             return cache;
         }

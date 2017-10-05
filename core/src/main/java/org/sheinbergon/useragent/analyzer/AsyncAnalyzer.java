@@ -32,9 +32,8 @@ public abstract class AsyncAnalyzer<INGESTION> {
     public abstract void teardown();
 
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    protected static abstract class Builder {
-
-        public abstract AsyncAnalyzer build();
+    protected static abstract class Builder<INGESTION, A extends AsyncAnalyzer<INGESTION>> {
+        public abstract A build();
     }
 
     @Override

@@ -64,7 +64,7 @@ public class UaParserJsAsyncAnalyzer extends AsyncAnalyzer<UaParserJsIngestion> 
 
     @Accessors(chain = true, fluent = true)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Builder extends AsyncAnalyzer.Builder {
+    public static class Builder extends AsyncAnalyzer.Builder<UaParserJsIngestion, UaParserJsAsyncAnalyzer> {
 
         @Setter
         private int v8RuntimeInstances = 10;

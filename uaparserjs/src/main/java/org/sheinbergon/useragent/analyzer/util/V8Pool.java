@@ -28,7 +28,7 @@ public class V8Pool {
     private final String[] scripts;
     private final GenericObjectPoolConfig poolConfig;
 
-    public final synchronized void setup() {
+    private final synchronized void setup() {
         if (!initialized) {
             pool = new GenericObjectPool<>(factory, poolConfig);
             initialized = true;

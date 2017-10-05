@@ -53,7 +53,7 @@ public class UaParserJsAnalyzer extends Analyzer<UaParserJsIngestion> {
 
     @Accessors(chain = true, fluent = true)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Builder extends Analyzer.Builder {
+    public static class Builder extends Analyzer.Builder<UaParserJsIngestion,UaParserJsAnalyzer> {
 
         @Setter
         private int v8RuntimeInstances = 10;
