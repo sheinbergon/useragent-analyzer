@@ -1,6 +1,7 @@
 package org.sheinbergon.useragent.analyzer.util;
 
 import com.eclipsesource.v8.V8;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.pool2.BasePooledObjectFactory;
@@ -18,7 +19,7 @@ import java.util.stream.Stream;
 /**
  * @author Idan Sheinberg
  */
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class V8Pool {
 
     private boolean initialized = false;
@@ -54,17 +55,18 @@ public class V8Pool {
         }
     }
 
-    public final V8 allocate(long allocateTimeoutMs) throws V8ResourceAllocationException {
+    public final V8 allocate(long timeoutMs) throws V8ResourceAllocationException {
         try {
-            return pool.borrowObject(allocateTimeoutMs);
+            return pool.borrowObject(timeoutMs);
         } catch (Exception x) {
-            throw new V8ResourceAllocationException("Couldn't allocate V8 runtime instance(waiting for " + allocateTimeoutMs + " at most)", x);
+            throw new V8ResourceAllocationException("Couldn't allocate V8 runtime instance(waiting for " + timeoutMs + " at most)", x);
         }
     }
 
     public final void release(V8 v8Runtime) {
         pool.returnObject(v8Runtime);
     }
+
 
     private class V8Factory extends BasePooledObjectFactory<V8> {
 
@@ -87,18 +89,18 @@ public class V8Pool {
     }
 
 
-    public static V8Pool create(int runtimeInstances, String[] scriptPaths) throws V8PoolSetupException {
+    public static V8Pool create(int size, String[] scriptPaths) throws V8PoolSetupException {
         try {
             GenericObjectPoolConfig v8PoolConfig = new GenericObjectPoolConfig();
-            v8PoolConfig.setMaxIdle(runtimeInstances);
-            v8PoolConfig.setMaxTotal(runtimeInstances);
-            v8PoolConfig.setMinIdle(runtimeInstances);
+            v8PoolConfig.setMaxIdle(size);
+            v8PoolConfig.setMaxTotal(size);
+            v8PoolConfig.setMinIdle(size);
             v8PoolConfig.setBlockWhenExhausted(true);
 
             String[] scripts = Stream.of(scriptPaths)
                     .map(path -> {
                         try {
-                            return IOUtils.toString(UaParserJsUtils.class.getClassLoader().getResourceAsStream(path), StandardCharsets.UTF_8);
+                            return IOUtils.toString(V8Pool.class.getClassLoader().getResourceAsStream(path), StandardCharsets.UTF_8);
                         } catch (IOException iox) {
                             throw new RuntimeException(iox);
                         }

@@ -17,12 +17,12 @@ import java.util.concurrent.CompletionStage;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AsyncAnalyzer<INGESTION> {
 
-    protected abstract CompletionStage<Optional<INGESTION>> ingest(String rawUserAgent) throws UserAgentIngestionException;
+    protected abstract CompletionStage<Optional<INGESTION>> ingest(String userAgent) throws UserAgentIngestionException;
 
     protected abstract Ingredients digest(INGESTION ingestion) throws UserAgentDigestionException;
 
-    public CompletableFuture<Ingredients> analyze(String rawUserAgent) throws UserAgentIngestionException, UserAgentDigestionException {
-        return ingest(rawUserAgent)
+    public CompletableFuture<Ingredients> analyze(String userAgent) throws UserAgentIngestionException, UserAgentDigestionException {
+        return ingest(userAgent)
                 .thenApplyAsync((ingestion) -> ingestion
                         .map(this::digest)
                         .orElseThrow(() -> new UserAgentIngestionException("Ingestion provided no results")))

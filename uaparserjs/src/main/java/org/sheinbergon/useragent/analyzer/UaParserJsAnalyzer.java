@@ -23,18 +23,19 @@ public class UaParserJsAnalyzer extends Analyzer<UaParserJsIngestion> {
     }
 
     private final V8Pool v8Pool;
-    
+
     @Override
     public void teardown() {
         v8Pool.teardown();
     }
 
     @Override
-    protected Optional<UaParserJsIngestion> ingest(String rawUserAgent) throws UserAgentIngestionException {
+    protected Optional<UaParserJsIngestion> ingest(String userAgent) throws UserAgentIngestionException {
         V8 v8 = null;
         try {
             v8 = v8Pool.allocate();
-            return UaParserJsUtils.v8ScriptExecute(v8, rawUserAgent)
+            return UaParserJsUtils
+                    .executeV8Function(v8,userAgent)
                     .map(UaParserJsUtils::jsonDeserialize);
         } finally {
             Optional.ofNullable(v8)
@@ -53,7 +54,7 @@ public class UaParserJsAnalyzer extends Analyzer<UaParserJsIngestion> {
 
     @Accessors(chain = true, fluent = true)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Builder extends Analyzer.Builder<UaParserJsIngestion,UaParserJsAnalyzer> {
+    public static class Builder extends Analyzer.Builder<UaParserJsIngestion, UaParserJsAnalyzer> {
 
         @Setter
         private int v8RuntimeInstances = 10;

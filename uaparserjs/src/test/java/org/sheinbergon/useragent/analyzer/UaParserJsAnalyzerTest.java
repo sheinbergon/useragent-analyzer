@@ -1,4 +1,4 @@
-package org.sheinbergon.useragent.analyer;
+package org.sheinbergon.useragent.analyzer;
 
 import org.junit.Test;
 

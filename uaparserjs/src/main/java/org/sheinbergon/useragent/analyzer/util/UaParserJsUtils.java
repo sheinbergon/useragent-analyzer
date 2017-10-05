@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import org.sheinbergon.useragent.Ingredients;
 import org.sheinbergon.useragent.IngredientsDeviceType;
+import org.sheinbergon.useragent.analyzer.UaParserJsIngestion;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
-import org.sheinbergon.useragent.analyzer.UaParserJsIngestion;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -20,9 +20,9 @@ public class UaParserJsUtils {
     private final static String UA_PARSER_JS = "ua-parser.js";
     private final static String WRAPPER = "ua-parser-j2v8-wrapper.js";
     private final static String[] SCRIPTS = new String[]{UA_PARSER_JS, WRAPPER};
+    private final static String WRAPPER_FUNCTION = "Wrapper";
 
-    private final static String J2V8_UA_PARSER_WRAPPER_FUNCTION = "UAParserWrapper";
-    private final static ObjectReader JACKSON_OBJECT_READER = new ObjectMapper().
+    final static ObjectReader JACKSON_OBJECT_READER = new ObjectMapper().
             configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).
             reader().
             forType(UaParserJsIngestion.class);
@@ -67,12 +67,12 @@ public class UaParserJsUtils {
     }
 
 
-    public static Optional<String> v8ScriptExecute(V8 v8, String userAgent) {
+    public static Optional<String> executeV8Function(V8 v8, String userAgent) {
         V8Array v8FunctionParams = null;
         try {
             v8.getLocker().acquire();
             v8FunctionParams = new V8Array(v8).push(userAgent);
-            return Optional.ofNullable(v8.executeStringFunction(J2V8_UA_PARSER_WRAPPER_FUNCTION, v8FunctionParams));
+            return Optional.ofNullable(v8.executeStringFunction(WRAPPER_FUNCTION, v8FunctionParams));
         } finally {
             // Release V8 engine function parameters array
             Optional.ofNullable(v8FunctionParams)

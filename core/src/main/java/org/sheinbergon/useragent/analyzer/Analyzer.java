@@ -15,12 +15,12 @@ import java.util.Optional;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Analyzer<INGESTION> {
 
-    protected abstract Optional<INGESTION> ingest(String rawUserAgent) throws UserAgentIngestionException;
+    protected abstract Optional<INGESTION> ingest(String userAgent) throws UserAgentIngestionException;
 
     protected abstract Ingredients digest(INGESTION ingestion) throws UserAgentDigestionException;
 
-    public Ingredients analyze(String rawUserAgent) throws UserAgentIngestionException, UserAgentDigestionException {
-        return ingest(rawUserAgent)
+    public Ingredients analyze(String userAgent) throws UserAgentIngestionException, UserAgentDigestionException {
+        return ingest(userAgent)
                 .map(this::digest)
                 .orElseThrow(() -> new UserAgentIngestionException("Ingestion provided no results"));
     }

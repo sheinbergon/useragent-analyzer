@@ -46,7 +46,8 @@ public class UaParserJsAsyncAnalyzer extends AsyncAnalyzer<UaParserJsIngestion> 
         return CompletableFuture.
                 supplyAsync(v8Pool::allocate, v8AllocationExecutor).
                 thenApplyAsync(v8 -> {
-                    Optional<String> result = UaParserJsUtils.v8ScriptExecute(v8, userAgent);
+                    Optional<String> result = UaParserJsUtils.
+                            executeV8Function(v8, userAgent);
                     v8Pool.release(v8);
                     return result;
                 }, v8ExecutionExecutor).
