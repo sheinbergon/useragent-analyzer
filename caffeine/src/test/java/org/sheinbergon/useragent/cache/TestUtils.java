@@ -4,7 +4,7 @@ import org.sheinbergon.useragent.Ingredients;
 
 final class TestUtils {
 
-    final static long EVICTION_DELAY = 50L;
+    final static long EVICTION_DELAY = 100L;
 
     final static int CACHE_SIZE = 1;
 
