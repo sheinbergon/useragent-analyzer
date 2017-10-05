@@ -16,7 +16,7 @@ public abstract class Cache {
     public abstract void write(String raw, Ingredients ingredients);
 
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    protected static abstract class Builder {
-        public abstract Cache build();
+    public static abstract class Builder<C extends Cache> {
+        public abstract C build();
     }
 }

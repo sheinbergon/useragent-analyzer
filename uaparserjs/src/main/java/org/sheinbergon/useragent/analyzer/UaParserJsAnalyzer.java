@@ -1,4 +1,4 @@
-package org.sheinbergon.useragent.analyzer.impl;
+package org.sheinbergon.useragent.analyzer;
 
 import com.eclipsesource.v8.V8;
 import lombok.AccessLevel;
@@ -7,12 +7,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.sheinbergon.useragent.Ingredients;
-import org.sheinbergon.useragent.analyzer.Analyzer;
 import org.sheinbergon.useragent.analyzer.exception.AnalyzerBuildException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
-import org.sheinbergon.useragent.analyzer.impl.util.UaParserJsUtils;
-import org.sheinbergon.useragent.analyzer.impl.util.V8Pool;
+import org.sheinbergon.useragent.analyzer.util.UaParserJsUtils;
+import org.sheinbergon.useragent.analyzer.util.V8Pool;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package org.sheinbergon.useragent.analyzer.impl;
+package org.sheinbergon.useragent.analyzer;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

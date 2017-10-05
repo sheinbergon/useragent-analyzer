@@ -1,4 +1,4 @@
-package org.sheinbergon.useragent.analyzer.impl.util;
+package org.sheinbergon.useragent.analyzer.util;
 
 import com.eclipsesource.v8.V8;
 import lombok.RequiredArgsConstructor;
@@ -8,8 +8,8 @@ import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.sheinbergon.useragent.analyzer.impl.exception.V8PoolSetupException;
-import org.sheinbergon.useragent.analyzer.impl.exception.V8ResourceAllocationException;
+import org.sheinbergon.useragent.analyzer.exception.V8PoolSetupException;
+import org.sheinbergon.useragent.analyzer.exception.V8ResourceAllocationException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

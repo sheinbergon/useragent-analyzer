@@ -17,8 +17,8 @@ public abstract class AsyncCache {
     public abstract CompletableFuture<Void> write(String raw, Ingredients ingredients);
 
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static abstract class Builder {
-        public abstract AsyncCache build();
+    public static abstract class Builder<C extends AsyncCache> {
+        public abstract C build();
 
         protected static AsyncCache wrap(final Cache cache) {
             return new AsyncCache() {

@@ -4,7 +4,7 @@ import lombok.Builder;
 import org.sheinbergon.useragent.analyzer.Analyzer;
 import org.sheinbergon.useragent.cache.Cache;
 
-@Builder
+@Builder(builderClassName = "Builder")
 public class UserAgentAnalyzer {
 
     private final Analyzer<?> analyzer;

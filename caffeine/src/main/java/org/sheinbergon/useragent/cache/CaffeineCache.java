@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.sheinbergon.useragent.Ingredients;
-import org.sheinbergon.useragent.cache.Cache;
 
 import java.util.Optional;
 
@@ -26,7 +25,7 @@ public class CaffeineCache extends Cache {
 
     private final int maxEntries;
 
-    public void setup() {
+    private void setup() {
         caffeine = Caffeine.newBuilder().
                 maximumSize(maxEntries).
                 build();
@@ -50,13 +49,13 @@ public class CaffeineCache extends Cache {
 
     @Accessors(chain = true, fluent = true)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Builder extends Cache.Builder {
+    public static class Builder extends Cache.Builder<CaffeineCache> {
 
         @Setter
         private int maxEntries = 100000;
 
         @Override
-        public Cache build() {
+        public CaffeineCache build() {
             CaffeineCache cache = new CaffeineCache(maxEntries);
             cache.setup();
             return cache;

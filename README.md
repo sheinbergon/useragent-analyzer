@@ -12,7 +12,6 @@ Current implementations specs:
 - Caching layer is implemented on top of [caffeine](https://github.com/ben-manes/caffeine)
 
 Future plans (by order of importance):
-- Add Windows/Mac support(for j2v8)
 - Add Maven releases
 - Add Unit Tests
 - Add more cache implementations 

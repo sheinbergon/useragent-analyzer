@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.sheinbergon.useragent.Ingredients;
-import org.sheinbergon.useragent.cache.AsyncCache;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -28,7 +27,7 @@ public class AsyncCaffeineCache extends AsyncCache {
 
     private final int maxEntries;
 
-    public void setup() {
+    void setup() {
         caffeine = Caffeine.newBuilder().
                 maximumSize(maxEntries).
                 buildAsync(key -> null);
@@ -43,22 +42,19 @@ public class AsyncCaffeineCache extends AsyncCache {
 
     @Override
     public CompletableFuture<Void> write(String raw, Ingredients ingredients) {
-        return CompletableFuture.supplyAsync(() -> {
-            caffeine.put(raw, CompletableFuture.completedFuture(ingredients));
-            return null;
-        });
+        return CompletableFuture.runAsync(() -> caffeine.put(raw, CompletableFuture.completedFuture(ingredients)));
     }
 
 
     @Accessors(chain = true, fluent = true)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Builder extends AsyncCache.Builder {
+    public static class Builder extends AsyncCache.Builder<AsyncCaffeineCache> {
 
         @Setter
         private int maxEntries = 100000;
 
         @Override
-        public AsyncCache build() {
+        public AsyncCaffeineCache build() {
             AsyncCaffeineCache cache = new AsyncCaffeineCache(maxEntries);
             cache.setup();
             return cache;

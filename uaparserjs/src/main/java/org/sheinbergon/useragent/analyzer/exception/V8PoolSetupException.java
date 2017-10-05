@@ -1,4 +1,4 @@
-package org.sheinbergon.useragent.analyzer.impl.exception;
+package org.sheinbergon.useragent.analyzer.exception;
 
 /**
  * @author Idan Sheinberg

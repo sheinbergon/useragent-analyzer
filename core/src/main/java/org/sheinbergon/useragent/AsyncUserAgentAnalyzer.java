@@ -6,7 +6,7 @@ import org.sheinbergon.useragent.cache.AsyncCache;
 
 import java.util.concurrent.CompletableFuture;
 
-@Builder
+@Builder(builderClassName = "Builder")
 public class AsyncUserAgentAnalyzer {
 
     private final AsyncAnalyzer<?> analyzer;

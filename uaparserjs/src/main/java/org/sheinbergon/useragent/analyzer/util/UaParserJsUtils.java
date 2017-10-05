@@ -1,4 +1,4 @@
-package org.sheinbergon.useragent.analyzer.impl.util;
+package org.sheinbergon.useragent.analyzer.util;
 
 import com.eclipsesource.v8.V8;
 import com.eclipsesource.v8.V8Array;
@@ -10,7 +10,7 @@ import org.sheinbergon.useragent.Ingredients;
 import org.sheinbergon.useragent.IngredientsDeviceType;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
-import org.sheinbergon.useragent.analyzer.impl.UaParserJsIngestion;
+import org.sheinbergon.useragent.analyzer.UaParserJsIngestion;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -28,7 +28,7 @@ public class UaParserJsUtils {
             forType(UaParserJsIngestion.class);
 
     public static Ingredients toIngredients(UaParserJsIngestion ingestion) throws UserAgentDigestionException {
-        Ingredients.IngredientsBuilder builder = Ingredients.builder();
+        Ingredients.Builder builder = Ingredients.builder();
 
         Optional.ofNullable(ingestion.getBrowser())
                 .ifPresent(browser -> builder

@@ -1,8 +1,7 @@
-package org.sheinbergon.useragent.cache.impl;
+package org.sheinbergon.useragent.cache;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.sheinbergon.useragent.cache.AsyncCache;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AsyncPseudoCache {

@@ -1,12 +1,16 @@
 package org.sheinbergon.useragent;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @author Idan Sheinberg
  */
-@Builder
+@Builder(builderClassName = "Builder")
+@EqualsAndHashCode
+@ToString
 public class Ingredients {
 
     @Getter
