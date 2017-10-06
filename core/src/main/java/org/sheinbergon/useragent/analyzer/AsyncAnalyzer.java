@@ -2,7 +2,7 @@ package org.sheinbergon.useragent.analyzer;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.sheinbergon.useragent.Ingredients;
+import org.sheinbergon.useragent.UserAgentIngredients;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
 
@@ -19,9 +19,9 @@ public abstract class AsyncAnalyzer<INGESTION> {
 
     protected abstract CompletionStage<Optional<INGESTION>> ingest(String userAgent) throws UserAgentIngestionException;
 
-    protected abstract Ingredients digest(INGESTION ingestion) throws UserAgentDigestionException;
+    protected abstract UserAgentIngredients digest(INGESTION ingestion) throws UserAgentDigestionException;
 
-    public CompletableFuture<Ingredients> analyze(String userAgent) throws UserAgentIngestionException, UserAgentDigestionException {
+    public CompletableFuture<UserAgentIngredients> analyze(String userAgent) throws UserAgentIngestionException, UserAgentDigestionException {
         return ingest(userAgent)
                 .thenApplyAsync((ingestion) -> ingestion
                         .map(this::digest)

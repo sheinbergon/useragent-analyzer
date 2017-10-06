@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.sheinbergon.useragent.Ingredients;
+import org.sheinbergon.useragent.UserAgentIngredients;
 
 import java.util.Optional;
 
@@ -21,7 +21,7 @@ public class CaffeineCache extends Cache {
         return new Builder();
     }
 
-    private com.github.benmanes.caffeine.cache.Cache<String, Ingredients> caffeine;
+    private com.github.benmanes.caffeine.cache.Cache<String, UserAgentIngredients> caffeine;
 
     private final int maxEntries;
 
@@ -37,12 +37,12 @@ public class CaffeineCache extends Cache {
     }
 
     @Override
-    public Optional<Ingredients> read(String raw) {
+    public Optional<UserAgentIngredients> read(String raw) {
         return Optional.ofNullable(caffeine.getIfPresent(raw));
     }
 
     @Override
-    public void write(String raw, Ingredients ingredients) {
+    public void write(String raw, UserAgentIngredients ingredients) {
         caffeine.put(raw, ingredients);
     }
 

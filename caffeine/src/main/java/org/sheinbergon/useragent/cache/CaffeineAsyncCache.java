@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.sheinbergon.useragent.Ingredients;
+import org.sheinbergon.useragent.UserAgentIngredients;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -23,7 +23,7 @@ public class CaffeineAsyncCache extends AsyncCache {
         return new Builder();
     }
 
-    private AsyncLoadingCache<String, Ingredients> caffeine;
+    private AsyncLoadingCache<String, UserAgentIngredients> caffeine;
 
     private final int maxEntries;
 
@@ -34,14 +34,14 @@ public class CaffeineAsyncCache extends AsyncCache {
     }
 
     @Override
-    public CompletableFuture<Optional<Ingredients>> read(String raw) {
+    public CompletableFuture<Optional<UserAgentIngredients>> read(String raw) {
         return Optional.ofNullable(caffeine.getIfPresent(raw))
                 .map(future -> future.thenApply(Optional::ofNullable))
                 .orElse(CompletableFuture.completedFuture(Optional.empty()));
     }
 
     @Override
-    public CompletableFuture<Void> write(String raw, Ingredients ingredients) {
+    public CompletableFuture<Void> write(String raw, UserAgentIngredients ingredients) {
         return CompletableFuture.runAsync(() -> caffeine.put(raw, CompletableFuture.completedFuture(ingredients)));
     }
 

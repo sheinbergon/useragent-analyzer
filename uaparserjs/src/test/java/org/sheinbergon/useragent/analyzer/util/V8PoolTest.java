@@ -15,21 +15,21 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.sheinbergon.useragent.analyzer.TestUtils.POOL_ALLOCATION_TIMEOUT_MS;
+import static org.sheinbergon.useragent.analyzer.TestUtils.POOL_SIZE;
 
 public class V8PoolTest {
 
     private final static ObjectReader JACKSON_OBJECT_READER = UaParserJsUtils.JACKSON_OBJECT_READER.forType(ObjectNode.class);
 
     private final static String TEST_FUNCTIONS_PATH = "test-functions.js";
-    private final static int POOL_SIZE = 1;
-    private final static long POOL_ALLOCATION_TIMEOUT_MS = 100L;
     private final static String NON_EXISTING_SCRIPT = "non/existing/script.js";
 
 
     @Before
     public void setup() throws Exception {
         pool = V8Pool.create(POOL_SIZE, new String[]{TEST_FUNCTIONS_PATH});
-        v8 = pool.allocate();
+        v8 = pool.allocate(POOL_ALLOCATION_TIMEOUT_MS);
     }
 
     @After

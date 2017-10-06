@@ -46,15 +46,7 @@ public class V8Pool {
             throw new IllegalStateException("V8 runtime pool hasn't been initiailized");
         }
     }
-
-    public final V8 allocate() throws V8ResourceAllocationException {
-        try {
-            return pool.borrowObject();
-        } catch (Exception x) {
-            throw new V8ResourceAllocationException("Couldn't allocate V8 runtime instance", x);
-        }
-    }
-
+    
     public final V8 allocate(long timeoutMs) throws V8ResourceAllocationException {
         try {
             return pool.borrowObject(timeoutMs);

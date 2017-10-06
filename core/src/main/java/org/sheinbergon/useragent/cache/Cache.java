@@ -2,7 +2,7 @@ package org.sheinbergon.useragent.cache;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.sheinbergon.useragent.Ingredients;
+import org.sheinbergon.useragent.UserAgentIngredients;
 
 import java.util.Optional;
 
@@ -11,9 +11,9 @@ import java.util.Optional;
  */
 public abstract class Cache {
 
-    public abstract Optional<Ingredients> read(String raw);
+    public abstract Optional<UserAgentIngredients> read(String raw);
 
-    public abstract void write(String raw, Ingredients ingredients);
+    public abstract void write(String raw, UserAgentIngredients ingredients);
 
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static abstract class Builder<C extends Cache> {

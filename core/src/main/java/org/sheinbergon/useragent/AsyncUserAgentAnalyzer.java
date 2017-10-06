@@ -13,7 +13,7 @@ public class AsyncUserAgentAnalyzer {
 
     private final AsyncCache cache;
 
-    public CompletableFuture<Ingredients> process(final String userAgent) {
+    public CompletableFuture<UserAgentIngredients> process(final String userAgent) {
         return cache.read(userAgent)
                 .thenComposeAsync(cached -> cached
                         .map(CompletableFuture::completedFuture)

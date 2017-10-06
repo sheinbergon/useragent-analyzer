@@ -11,7 +11,20 @@ import lombok.ToString;
 @Builder(builderClassName = "Builder")
 @EqualsAndHashCode
 @ToString
-public class Ingredients {
+public class UserAgentIngredients {
+
+    public static final UserAgentIngredients EMPTY = builder().deviceType(Device.UNKNOWN).build();
+
+    public enum Device {
+        UNKNOWN,
+        PC,
+        MOBILE,
+        TABLET,
+        SMART_TV,
+        WEARABLE,
+        CONSOLE,
+        EMBEDDED
+    }
 
     @Getter
     private String osName;
@@ -26,7 +39,7 @@ public class Ingredients {
     @Getter
     private String renderingEngineVersion;
     @Getter
-    private IngredientsDeviceType deviceType;
+    private Device deviceType;
     @Getter
     private String deviceModel;
     @Getter
@@ -34,3 +47,5 @@ public class Ingredients {
     @Getter
     private String cpuArchitecture;
 }
+
+

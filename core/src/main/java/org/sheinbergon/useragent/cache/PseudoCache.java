@@ -2,7 +2,7 @@ package org.sheinbergon.useragent.cache;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.sheinbergon.useragent.Ingredients;
+import org.sheinbergon.useragent.UserAgentIngredients;
 
 import java.util.Optional;
 
@@ -14,12 +14,12 @@ public class PseudoCache extends Cache {
     }
 
     @Override
-    public Optional<Ingredients> read(String raw) {
+    public Optional<UserAgentIngredients> read(String raw) {
         return Optional.empty();
     }
 
     @Override
-    public void write(String raw, Ingredients ingredients) {
+    public void write(String raw, UserAgentIngredients ingredients) {
     }
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)

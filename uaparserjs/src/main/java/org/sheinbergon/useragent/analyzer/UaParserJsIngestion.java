@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author Idan Sheinberg
  */
 @Data
+@Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UaParserJsIngestion {
 
-    @JsonProperty("ua")
-    private String ua;
     @JsonProperty("browser")
     private Browser browser;
     @JsonProperty("engine")
@@ -31,6 +31,7 @@ public class UaParserJsIngestion {
      * @author Idan Sheinberg
      */
     @Data
+    @Accessors(chain = true)
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Browser {
@@ -45,6 +46,7 @@ public class UaParserJsIngestion {
      * @author idans
      */
     @Data
+    @Accessors(chain = true)
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Cpu {
@@ -56,6 +58,7 @@ public class UaParserJsIngestion {
      * @author idans
      */
     @Data
+    @Accessors(chain = true)
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Device {
@@ -72,6 +75,7 @@ public class UaParserJsIngestion {
      * @author Idan Sheinberg
      */
     @Data
+    @Accessors(chain = true)
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Engine {
@@ -85,6 +89,7 @@ public class UaParserJsIngestion {
      * @author Idan Sheinberg
      */
     @Data
+    @Accessors(chain = true)
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     @JsonPropertyOrder(value = {"name", "version"})
     @JsonIgnoreProperties(ignoreUnknown = true)

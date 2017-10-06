@@ -6,8 +6,7 @@ import com.eclipsesource.v8.V8Locker;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
-import org.sheinbergon.useragent.Ingredients;
-import org.sheinbergon.useragent.IngredientsDeviceType;
+import org.sheinbergon.useragent.UserAgentIngredients;
 import org.sheinbergon.useragent.analyzer.UaParserJsIngestion;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
@@ -19,7 +18,6 @@ public class UaParserJsUtils {
 
     private final static String UA_PARSER_JS = "ua-parser.js";
     private final static String WRAPPER = "ua-parser-j2v8-wrapper.js";
-    private final static String[] SCRIPTS = new String[]{UA_PARSER_JS, WRAPPER};
     private final static String WRAPPER_FUNCTION = "Wrapper";
 
     final static ObjectReader JACKSON_OBJECT_READER = new ObjectMapper().
@@ -27,47 +25,82 @@ public class UaParserJsUtils {
             reader().
             forType(UaParserJsIngestion.class);
 
-    public static Ingredients toIngredients(UaParserJsIngestion ingestion) throws UserAgentDigestionException {
-        Ingredients.Builder builder = Ingredients.builder();
+    public final static String[] SCRIPTS = new String[]{UA_PARSER_JS, WRAPPER};
 
-        Optional.ofNullable(ingestion.getBrowser())
-                .ifPresent(browser -> builder
-                        .browserName(browser.getName())
-                        .browserVersion(browser.getVersion()));
+    public static UserAgentIngredients digest(UaParserJsIngestion ingestion) throws UserAgentDigestionException {
+        try {
+            UserAgentIngredients.Builder builder = UserAgentIngredients.builder();
 
-        Optional.ofNullable(ingestion.getEngine())
-                .ifPresent(engine -> builder
-                        .renderingEngineName(engine.getName())
-                        .renderingEngineVersion(engine.getVersion()));
+            Optional.ofNullable(ingestion.getBrowser())
+                    .ifPresent(browser -> builder
+                            .browserName(browser.getName())
+                            .browserVersion(browser.getVersion()));
 
-        Optional.ofNullable(ingestion.getOs())
-                .ifPresent(os -> builder
-                        .osName(os.getName())
-                        .osVersion(os.getVersion()));
+            Optional.ofNullable(ingestion.getEngine())
+                    .ifPresent(engine -> builder
+                            .renderingEngineName(engine.getName())
+                            .renderingEngineVersion(engine.getVersion()));
 
-        Optional.ofNullable(ingestion.getDevice())
-                .ifPresent(device -> builder
-                        .deviceMake(device.getVendor())
-                        .deviceModel(device.getModel())
-                        .deviceType(toIngredientsDeviceType(device.getType())));
+            Optional.ofNullable(ingestion.getOs())
+                    .ifPresent(os -> builder
+                            .osName(os.getName())
+                            .osVersion(os.getVersion()));
 
-        Optional.ofNullable(ingestion.getCpu())
-                .ifPresent(cpu -> builder
-                        .cpuArchitecture(cpu.getArchitecture()));
+            Optional.ofNullable(ingestion.getDevice())
+                    .ifPresent(device -> builder
+                            .deviceMake(device.getVendor())
+                            .deviceModel(device.getModel())
+                            .deviceType(digestDevice(device.getType())));
 
-        return builder.build();
+            Optional.ofNullable(ingestion.getCpu())
+                    .ifPresent(cpu -> builder
+                            .cpuArchitecture(cpu.getArchitecture()));
+
+            return builder.build();
+        } catch (RuntimeException rx) {
+            throw new UserAgentDigestionException(rx);
+        }
     }
 
-    public static UaParserJsIngestion jsonDeserialize(String json) {
+    public static Optional<UaParserJsIngestion> ingest(V8 v8, String userAgent) {
         try {
-            return JACKSON_OBJECT_READER.readValue(json);
-        } catch (IOException iox) {
-            throw new UserAgentIngestionException(iox);
+            return executeV8Function(v8, userAgent)
+                    .map(result -> {
+                        try {
+                            return (UaParserJsIngestion) JACKSON_OBJECT_READER.readValue(result);
+                        } catch (IOException iox) {
+                            throw new IllegalArgumentException(String.format("Result %s returned from V8 function call could not be deserialized", result), iox);
+                        }
+                    });
+        } catch (RuntimeException x) {
+            throw new UserAgentIngestionException(x);
         }
     }
 
 
-    public static Optional<String> executeV8Function(V8 v8, String userAgent) {
+    public static UserAgentIngredients.Device digestDevice(String device) {
+        return Optional.ofNullable(device)
+                .map(type -> {
+                    switch (type) {
+                        case "mobile":
+                            return UserAgentIngredients.Device.MOBILE;
+                        case "tablet":
+                            return UserAgentIngredients.Device.TABLET;
+                        case "smarttv":
+                            return UserAgentIngredients.Device.SMART_TV;
+                        case "wearable":
+                            return UserAgentIngredients.Device.WEARABLE;
+                        case "console":
+                            return UserAgentIngredients.Device.CONSOLE;
+                        case "embedded":
+                            return UserAgentIngredients.Device.EMBEDDED;
+                        default:
+                            return UserAgentIngredients.Device.UNKNOWN;
+                    }
+                }).orElse(UserAgentIngredients.Device.UNKNOWN);
+    }
+
+    static Optional<String> executeV8Function(V8 v8, String userAgent) {
         V8Array v8FunctionParams = null;
         try {
             v8.getLocker().acquire();
@@ -82,33 +115,5 @@ public class UaParserJsUtils {
                     .filter(V8Locker::hasLock)
                     .ifPresent(V8Locker::release);
         }
-    }
-
-
-    public static String[] scriptPaths() {
-        return SCRIPTS;
-    }
-
-
-    public static IngredientsDeviceType toIngredientsDeviceType(String device) {
-        return Optional.ofNullable(device)
-                .map(type -> {
-                    switch (type) {
-                        case "mobile":
-                            return IngredientsDeviceType.MOBILE;
-                        case "tablet":
-                            return IngredientsDeviceType.TABLET;
-                        case "smarttv":
-                            return IngredientsDeviceType.SMART_TV;
-                        case "wearable":
-                            return IngredientsDeviceType.WEARABLE;
-                        case "console":
-                            return IngredientsDeviceType.CONSOLE;
-                        case "embedded":
-                            return IngredientsDeviceType.EMBEDDED;
-                        default:
-                            return IngredientsDeviceType.UNKNOWN;
-                    }
-                }).orElse(IngredientsDeviceType.UNKNOWN);
     }
 }

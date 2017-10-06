@@ -11,8 +11,8 @@ public class UserAgentAnalyzer {
 
     private final Cache cache;
 
-    public Ingredients process(final String userAgent) {
-        Ingredients ingredients = cache.read(userAgent)
+    public UserAgentIngredients process(final String userAgent) {
+        UserAgentIngredients ingredients = cache.read(userAgent)
                 .orElseGet(() -> analyzer.analyze(userAgent));
 
         cache.write(userAgent, ingredients);

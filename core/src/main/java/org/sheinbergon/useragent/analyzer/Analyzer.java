@@ -2,7 +2,7 @@ package org.sheinbergon.useragent.analyzer;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.sheinbergon.useragent.Ingredients;
+import org.sheinbergon.useragent.UserAgentIngredients;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentIngestionException;
 
@@ -17,9 +17,9 @@ public abstract class Analyzer<INGESTION> {
 
     protected abstract Optional<INGESTION> ingest(String userAgent) throws UserAgentIngestionException;
 
-    protected abstract Ingredients digest(INGESTION ingestion) throws UserAgentDigestionException;
+    protected abstract UserAgentIngredients digest(INGESTION ingestion) throws UserAgentDigestionException;
 
-    public Ingredients analyze(String userAgent) throws UserAgentIngestionException, UserAgentDigestionException {
+    public UserAgentIngredients analyze(String userAgent) throws UserAgentIngestionException, UserAgentDigestionException {
         return ingest(userAgent)
                 .map(this::digest)
                 .orElseThrow(() -> new UserAgentIngestionException("Ingestion provided no results"));
