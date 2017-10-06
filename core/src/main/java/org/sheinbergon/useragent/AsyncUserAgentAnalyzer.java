@@ -13,6 +13,7 @@ public class AsyncUserAgentAnalyzer {
 
     private final AsyncCache cache;
 
+    // TODO - Maybe add a dedicated executor to the analyzer ?
     public CompletableFuture<UserAgentIngredients> process(final String userAgent) {
         return cache.read(userAgent)
                 .thenComposeAsync(cached -> cached
