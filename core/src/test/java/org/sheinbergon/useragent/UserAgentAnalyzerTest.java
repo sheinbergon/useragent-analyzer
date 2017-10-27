@@ -43,8 +43,8 @@ public class UserAgentAnalyzerTest {
     @Test
     public void cacheHit() {
         mockCacheHit();
-        UserAgentIngredients result = userAgentAnalyzer.process(VALID_USER_AGENT);
-        assertEquals(result, VALID_USER_AGENT_INGREDIENTS);
+        UserAgentIngredients ingredients = userAgentAnalyzer.process(VALID_USER_AGENT);
+        assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS);
     }
 
     @Test(expected = UserAgentDigestionException.class)
@@ -60,8 +60,8 @@ public class UserAgentAnalyzerTest {
         mockCacheMiss();
         mockAnalyzerSuccess();
         mockCacheWrite(cacheWriteFlag);
-        UserAgentIngredients result = userAgentAnalyzer.process(VALID_USER_AGENT);
-        assertEquals(result, VALID_USER_AGENT_INGREDIENTS);
+        UserAgentIngredients ingredients = userAgentAnalyzer.process(VALID_USER_AGENT);
+        assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS);
         assertTrue(cacheWriteFlag.get());
     }
 
@@ -82,7 +82,7 @@ public class UserAgentAnalyzerTest {
     }
 
     private void mockCacheWrite(final AtomicBoolean flag) {
-        Mockito.doAnswer(invocationOnMock -> {
+        Mockito.doAnswer(invocation -> {
             flag.set(true);
             return null;
         }).when(cache).write(anyString(), any(UserAgentIngredients.class));

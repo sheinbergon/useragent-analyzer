@@ -57,7 +57,7 @@ public class AsyncAnalyzerTest {
 
     private void mockAnyIngetsion() {
         when(analyzer.ingest(anyString()))
-                .thenReturn(CompletableFuture.supplyAsync(() -> Optional.of(new Object())));
+                .thenReturn(CompletableFuture.completedFuture(Optional.of(new Object())));
     }
 
     private void mockSuccesfulDigetsion() {
