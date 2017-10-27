@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.sheinbergon.useragent.UserAgentIngredients;
 
 import static org.junit.Assert.assertEquals;
-import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_DIGESTION;
+import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_USER_AGENT_INGREDIENTS;
 import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.randomString;
 
 
@@ -27,7 +27,7 @@ public class UaParserJsAnalyzerTest {
 
     @Test
     public void validAnalysis() {
-        assertEquals(analyzer.analyze(AnalyzerTestUtils.VALID_USER_AGENT), VALID_DIGESTION);
+        assertEquals(analyzer.analyze(AnalyzerTestUtils.VALID_USER_AGENT), VALID_USER_AGENT_INGREDIENTS);
     }
 
     @Test

@@ -35,7 +35,7 @@ public class AnalyzerTest {
         mockSuccesfulDigetsion();
         mockExternalAccess();
         UserAgentIngredients ingredients = analyzer.analyze(VALID_USER_AGENT);
-        assertEquals(ingredients, VALID_DIGESTION);
+        assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS);
     }
 
     private void mockExternalAccess() {
@@ -52,6 +52,6 @@ public class AnalyzerTest {
     }
 
     private void mockSuccesfulDigetsion() {
-        when(analyzer.digest(any())).thenReturn(VALID_DIGESTION);
+        when(analyzer.digest(any())).thenReturn(VALID_USER_AGENT_INGREDIENTS);
     }
 }

@@ -28,7 +28,7 @@ public class UaParserJsAsyncAnalyzerTest {
     @Test
     public void validAnalysis() throws ExecutionException, InterruptedException {
         analyzer.analyze(VALID_USER_AGENT)
-                .thenAccept(ingredients -> assertEquals(ingredients, VALID_DIGESTION))
+                .thenAccept(ingredients -> assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS))
                 .get();
     }
 

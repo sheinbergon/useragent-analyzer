@@ -7,7 +7,7 @@ import org.sheinbergon.useragent.analyzer.util.UaParserJsUtils;
 
 import java.util.UUID;
 
-import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_DIGESTION;
+import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_USER_AGENT_INGREDIENTS;
 import static org.sheinbergon.useragent.analyzer.UaParserJsTestUtils.INGESTION;
 
 
@@ -19,6 +19,6 @@ public class DigestionTest {
 
     @Test
     public void validDigestion() {
-        Assert.assertEquals(UaParserJsUtils.digest(INGESTION), VALID_DIGESTION);
+        Assert.assertEquals(UaParserJsUtils.digest(INGESTION), VALID_USER_AGENT_INGREDIENTS);
     }
 }
