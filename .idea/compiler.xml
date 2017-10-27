@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="useragent-analyzer-caffeine" />
         <module name="useragent-analyzer-core" />
+        <module name="useragent-analyzer-uaparserjs" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

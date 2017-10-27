@@ -10,7 +10,9 @@ import org.sheinbergon.useragent.analyzer.util.V8Pool;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.sheinbergon.useragent.analyzer.TestUtils.*;
+import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_USER_AGENT;
+import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.randomString;
+import static org.sheinbergon.useragent.analyzer.UaParserJsTestUtils.*;
 
 public class IngestionTest {
 

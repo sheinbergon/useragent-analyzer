@@ -8,7 +8,7 @@ import org.sheinbergon.useragent.UserAgentIngredients;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
-import static org.sheinbergon.useragent.analyzer.TestUtils.DIGESTION;
+import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.*;
 
 // TODO - Add invalid build values tests
 public class UaParserJsAsyncAnalyzerTest {
@@ -27,14 +27,14 @@ public class UaParserJsAsyncAnalyzerTest {
 
     @Test
     public void validAnalysis() throws ExecutionException, InterruptedException {
-        analyzer.analyze(TestUtils.VALID_USER_AGENT)
-                .thenAccept(ingredients -> assertEquals(ingredients, DIGESTION))
+        analyzer.analyze(VALID_USER_AGENT)
+                .thenAccept(ingredients -> assertEquals(ingredients, VALID_DIGESTION))
                 .get();
     }
 
     @Test
     public void invalidInputAnalysis() throws ExecutionException, InterruptedException {
-        analyzer.analyze(TestUtils.randomString())
+        analyzer.analyze(randomString())
                 .thenAccept(ingredients -> assertEquals(ingredients, UserAgentIngredients.EMPTY))
                 .get();
     }

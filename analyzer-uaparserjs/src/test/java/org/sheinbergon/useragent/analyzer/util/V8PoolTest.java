@@ -15,8 +15,8 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.sheinbergon.useragent.analyzer.TestUtils.POOL_ALLOCATION_TIMEOUT_MS;
-import static org.sheinbergon.useragent.analyzer.TestUtils.POOL_SIZE;
+import static org.sheinbergon.useragent.analyzer.UaParserJsTestUtils.POOL_ALLOCATION_TIMEOUT_MS;
+import static org.sheinbergon.useragent.analyzer.UaParserJsTestUtils.POOL_SIZE;
 
 public class V8PoolTest {
 

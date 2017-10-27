@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.sheinbergon.useragent.UserAgentIngredients;
 
 import static org.junit.Assert.assertEquals;
-import static org.sheinbergon.useragent.analyzer.TestUtils.DIGESTION;
-import static org.sheinbergon.useragent.analyzer.TestUtils.randomString;
+import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_DIGESTION;
+import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.randomString;
 
 
 // TODO - Add invalid build values tests
@@ -27,7 +27,7 @@ public class UaParserJsAnalyzerTest {
 
     @Test
     public void validAnalysis() {
-        assertEquals(analyzer.analyze(TestUtils.VALID_USER_AGENT), DIGESTION);
+        assertEquals(analyzer.analyze(AnalyzerTestUtils.VALID_USER_AGENT), VALID_DIGESTION);
     }
 
     @Test
