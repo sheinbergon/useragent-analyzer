@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.sheinbergon.useragent.analyzer.Analyzer;
 import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
@@ -17,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_USER_AGENT;
 import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_USER_AGENT_INGREDIENTS;
@@ -82,7 +82,7 @@ public class UserAgentAnalyzerTest {
     }
 
     private void mockCacheWrite(final AtomicBoolean flag) {
-        Mockito.doAnswer(invocation -> {
+        doAnswer(invocation -> {
             flag.set(true);
             return null;
         }).when(cache).write(anyString(), any(UserAgentIngredients.class));

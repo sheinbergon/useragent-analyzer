@@ -91,7 +91,7 @@ public class AsyncUserAgentAnalyzerTest {
     }
 
     private void mockCacheWrite(final AtomicBoolean flag) {
-        Mockito.when(cache.write(anyString(), any(UserAgentIngredients.class)))
+        when(cache.write(anyString(), any(UserAgentIngredients.class)))
                 .thenAnswer(invocation -> {
                     flag.set(true);
                     return null;
