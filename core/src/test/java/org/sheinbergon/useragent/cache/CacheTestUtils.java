@@ -2,11 +2,7 @@ package org.sheinbergon.useragent.cache;
 
 import org.sheinbergon.useragent.UserAgentIngredients;
 
-final class TestUtils {
-
-    final static long EVICTION_DELAY = 100L;
-
-    final static int CACHE_SIZE = 1;
+public final class CacheTestUtils {
 
     final static String TEST_KEY_1 = "key-1";
     final static UserAgentIngredients TEST_INGREDIENTS_1 = UserAgentIngredients.builder().

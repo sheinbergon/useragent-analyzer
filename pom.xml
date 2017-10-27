@@ -7,8 +7,8 @@
     <version>0.0.1</version>
     <modules>
         <module>core</module>
-        <module>caffeine</module>
-        <module>uaparserjs</module>
+        <module>cache-caffeine</module>
+        <module>analyzer-uaparserjs</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -109,7 +109,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
+                        <version>1.6.5</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>oss-nexus</serverId>

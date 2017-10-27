@@ -2,8 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/caffeine" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/analyzer-uaparserjs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cache-caffeine" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/uaparserjs" charset="UTF-8" />
   </component>
 </project>

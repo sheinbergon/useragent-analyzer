@@ -8,7 +8,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
-import static org.sheinbergon.useragent.cache.TestUtils.*;
+import static org.sheinbergon.useragent.cache.CacheTestUtils.*;
+import static org.sheinbergon.useragent.cache.CaffeineTestUtils.CACHE_SIZE;
+import static org.sheinbergon.useragent.cache.CaffeineTestUtils.EVICTION_DELAY;
 
 public class CaffeineAsyncCacheTest {
 
@@ -22,7 +24,7 @@ public class CaffeineAsyncCacheTest {
     private CaffeineAsyncCache cache = null;
 
     @Test
-    public void verifyCacheInsertion() throws ExecutionException, TimeoutException, InterruptedException {
+    public void cacheInsertion() throws ExecutionException, TimeoutException, InterruptedException {
         cache.write(TEST_KEY_1, TEST_INGREDIENTS_1)
                 .thenCompose(unit -> cache.read(TEST_KEY_1))
                 .thenAccept(optional -> {
@@ -33,7 +35,7 @@ public class CaffeineAsyncCacheTest {
     }
 
     @Test
-    public void verifyCacheEviction() throws ExecutionException, TimeoutException, InterruptedException {
+    public void cacheEviction() throws ExecutionException, TimeoutException, InterruptedException {
         cache.write(TEST_KEY_1, TEST_INGREDIENTS_1)
                 .thenCompose(unit -> cache.write(TEST_KEY_2, TEST_INGREDIENTS_2))
                 .thenRun(Unchecked.runnable(() -> Thread.sleep(EVICTION_DELAY)))
