@@ -9,9 +9,10 @@ A non-opinionated User-Agent analysis proxy written in Java 8.
 
 ## Dependencies :
 
-Simply add the 'useragent-analyzer-dist' dependency. Note that this distribution jar
-relies on the user providing the j2v8 jar for the targeted architecture. The following
-examples target 64 bit linux execution environemnts, but other operating systems are
+Simply add the 'useragent-analyzer-dist' dependency.
+
+Note that this distribution jar relies on the user providing the j2v8 jar for the targeted architecture.
+The following examples targets 64 bit linux execution environments, but other operating systems are
 supported as well. See [Maven Central](https://mvnrepository.com/artifact/com.eclipsesource.j2v8) for additional information. 
 
 Maven:
