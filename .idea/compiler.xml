@@ -6,16 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="useragent-analyzer-cache-caffeine" />
         <module name="useragent-analyzer-caffeine" />
         <module name="useragent-analyzer-core" />
         <module name="useragent-analyzer-uaparserjs" />
+        <module name="useragentanalyzercache" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="useragent-analyzer" target="1.8" />
+      <module name="useragent-analyzer-cache" target="1.8" />
+      <module name="useragent-analyzer-cache (2)" target="1.8" />
+      <module name="useragent-analyzer-cache-caffeine" target="1.8" />
       <module name="useragent-analyzer-caffeine" target="1.8" />
       <module name="useragent-analyzer-core" target="1.8" />
+      <module name="useragent-analyzer-dist" target="1.8" />
+      <module name="useragent-analyzer-processor" target="1.8" />
       <module name="useragent-analyzer-uaparserjs" target="1.8" />
+      <module name="useragentanalyzercache" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

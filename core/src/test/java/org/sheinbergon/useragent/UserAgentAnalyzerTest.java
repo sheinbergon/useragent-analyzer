@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.sheinbergon.useragent.analyzer.Analyzer;
-import org.sheinbergon.useragent.analyzer.exception.UserAgentDigestionException;
+import org.sheinbergon.useragent.processor.Processor;
+import org.sheinbergon.useragent.processor.exception.UserAgentDigestionException;
 import org.sheinbergon.useragent.cache.Cache;
 
 import java.util.Optional;
@@ -18,14 +18,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
-import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_USER_AGENT;
-import static org.sheinbergon.useragent.analyzer.AnalyzerTestUtils.VALID_USER_AGENT_INGREDIENTS;
+import static org.sheinbergon.useragent.processor.ProcessorTestUtils.VALID_USER_AGENT;
+import static org.sheinbergon.useragent.processor.ProcessorTestUtils.VALID_USER_AGENT_INGREDIENTS;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserAgentAnalyzerTest {
 
     @Mock
-    private Analyzer analyzer;
+    private Processor processor;
 
     @Mock
     private Cache cache;
@@ -35,7 +35,7 @@ public class UserAgentAnalyzerTest {
     @Before
     public void setup() {
         userAgentAnalyzer = UserAgentAnalyzer.builder()
-                .analyzer(analyzer)
+                .processor(processor)
                 .cache(cache)
                 .build();
     }
@@ -43,24 +43,24 @@ public class UserAgentAnalyzerTest {
     @Test
     public void cacheHit() {
         mockCacheHit();
-        UserAgentIngredients ingredients = userAgentAnalyzer.process(VALID_USER_AGENT);
+        UserAgentIngredients ingredients = userAgentAnalyzer.analyze(VALID_USER_AGENT);
         assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS);
     }
 
     @Test(expected = UserAgentDigestionException.class)
-    public void cacheMissAnalyzerError() {
+    public void cacheMissProcessorError() {
         mockCacheMiss();
-        mockAnalyzerError();
-        userAgentAnalyzer.process(VALID_USER_AGENT);
+        mockProcessorError();
+        userAgentAnalyzer.analyze(VALID_USER_AGENT);
     }
 
     @Test
-    public void cacheMissAnalyzerSuccess() {
+    public void cacheMissProcessorSuccess() {
         AtomicBoolean cacheWriteFlag = new AtomicBoolean(false);
         mockCacheMiss();
-        mockAnalyzerSuccess();
+        mockProcessorSuccess();
         mockCacheWrite(cacheWriteFlag);
-        UserAgentIngredients ingredients = userAgentAnalyzer.process(VALID_USER_AGENT);
+        UserAgentIngredients ingredients = userAgentAnalyzer.analyze(VALID_USER_AGENT);
         assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS);
         assertTrue(cacheWriteFlag.get());
     }
@@ -73,12 +73,12 @@ public class UserAgentAnalyzerTest {
         when(cache.read(VALID_USER_AGENT)).thenReturn(Optional.empty());
     }
 
-    private void mockAnalyzerError() {
-        when(analyzer.analyze(VALID_USER_AGENT)).thenThrow(new UserAgentDigestionException("Mock Error"));
+    private void mockProcessorError() {
+        when(processor.process(VALID_USER_AGENT)).thenThrow(new UserAgentDigestionException("Mock Error"));
     }
 
-    private void mockAnalyzerSuccess() {
-        when(analyzer.analyze(VALID_USER_AGENT)).thenReturn(VALID_USER_AGENT_INGREDIENTS);
+    private void mockProcessorSuccess() {
+        when(processor.process(VALID_USER_AGENT)).thenReturn(VALID_USER_AGENT_INGREDIENTS);
     }
 
     private void mockCacheWrite(final AtomicBoolean flag) {

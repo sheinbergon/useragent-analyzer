@@ -7,8 +7,9 @@
     <version>0.0.1</version>
     <modules>
         <module>core</module>
-        <module>cache-caffeine</module>
-        <module>analyzer-uaparserjs</module>
+        <module>cache</module>
+        <module>processor</module>
+        <module>dist</module>
     </modules>
     <packaging>pom</packaging>
 
