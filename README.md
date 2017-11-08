@@ -5,7 +5,7 @@ A non-opinionated User-Agent analysis proxy written in Java 8.
 
 ## Key concepts
 - Provides both synchronous & fully asynchronous APIs.  
-- Pluggable architecture for both caching & procesing(parsing) modules.
+- Pluggable architecture for both caching & processing(parsing) modules.
 
 ## Getting Started
 
