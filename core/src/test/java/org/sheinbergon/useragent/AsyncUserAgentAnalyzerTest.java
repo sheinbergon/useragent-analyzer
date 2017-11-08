@@ -44,10 +44,11 @@ public class AsyncUserAgentAnalyzerTest {
     }
 
     @Test
-    public void cacheHit() {
+    public void cacheHit() throws InterruptedException, ExecutionException {
         mockCacheHit();
         userAgentAnalyzer.analyze(VALID_USER_AGENT)
-                .thenAccept(ingredients -> assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS));
+                .thenAccept(ingredients -> assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS))
+                .get();
     }
 
     @Test(expected = UserAgentDigestionException.class)
@@ -62,7 +63,7 @@ public class AsyncUserAgentAnalyzerTest {
     }
 
     @Test
-    public void cacheMissProcessorSuccess() {
+    public void cacheMissProcessorSuccess() throws InterruptedException, ExecutionException {
         AtomicBoolean cacheWriteFlag = new AtomicBoolean(false);
         mockCacheMiss();
         mockProcessorSuccess();
@@ -71,7 +72,7 @@ public class AsyncUserAgentAnalyzerTest {
                 .thenAccept(ingredients -> {
                     assertEquals(ingredients, VALID_USER_AGENT_INGREDIENTS);
                     assertTrue(cacheWriteFlag.get());
-                });
+                }).get();
     }
 
     private void mockCacheHit() {
