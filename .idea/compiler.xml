@@ -9,6 +9,7 @@
         <module name="useragent-analyzer-cache-caffeine" />
         <module name="useragent-analyzer-caffeine" />
         <module name="useragent-analyzer-core" />
+        <module name="useragent-analyzer-processor-uaparserjs" />
         <module name="useragent-analyzer-uaparserjs" />
         <module name="useragentanalyzercache" />
       </profile>
@@ -22,6 +23,7 @@
       <module name="useragent-analyzer-core" target="1.8" />
       <module name="useragent-analyzer-dist" target="1.8" />
       <module name="useragent-analyzer-processor" target="1.8" />
+      <module name="useragent-analyzer-processor-uaparserjs" target="1.8" />
       <module name="useragent-analyzer-uaparserjs" target="1.8" />
       <module name="useragentanalyzercache" target="1.8" />
     </bytecodeTargetLevel>
