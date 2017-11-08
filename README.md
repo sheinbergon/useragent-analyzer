@@ -3,11 +3,11 @@
 
 A non-opinionated User-Agent analysis proxy written in Java 8.
 
-## Key concepts :
+## Key concepts
 - Provides both synchronous & fully asynchronous APIs.  
 - Pluggable architecture for both caching & procesing(parsing) modules.
 
-## Getting Started :
+## Getting Started
 
 ### Dependencies
 
