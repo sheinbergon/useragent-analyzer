@@ -79,8 +79,8 @@ See Implementation Specs below
 - Uses the popular javascript useragent parsing library [ua-parser.js](https://github.com/faisalman/ua-parser-js)
 - Javascript code is executed uses [J2V8](https://github.com/eclipsesource/J2V8)
 - Requires an explicit J2V8 dependency defintion per operating system/architecture. See supported architectures [here](https://mvnrepository.com/artifact/com.eclipsesource.j2v8)
-- As V8Engine are not thread-safe, it uses an object-pool to support concurrency with confiugrable allocation  timeout (milliseconds)
-- Async version also support executor pools size for V8 Engine allocation and ingestion
+- As V8Engine are not thread-safe, it uses an object-pool to support concurrency with confiugrable size allocation timeout (milliseconds)
+- Async version also supports executor pools size for V8 Engine allocation and ingestion
 ```java
 // Sync
 UserAgentAnalyzer.builder()
