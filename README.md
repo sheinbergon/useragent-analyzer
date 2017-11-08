@@ -17,8 +17,7 @@ Note that this distribution jar relies on the user providing the j2v8 jar for th
 The following examples targets 64 bit linux execution environments, but other operating systems are
 supported as well. See [Maven Central](https://mvnrepository.com/artifact/com.eclipsesource.j2v8) for additional information. 
 
-#### Maven:
-
+#### Maven
 ```xml
 <dependencies>
     ...
@@ -36,8 +35,7 @@ supported as well. See [Maven Central](https://mvnrepository.com/artifact/com.ec
 </dependencies>
 
 ```
-#### Gradle :
-
+#### Gradle
 ```groovy
     compile group: 'com.eclipsesource.j2v8', name: 'j2v8_linux_x86_64', version: '4.8.0'
     compile group: 'org.sheinbergon', name: 'useragent-analyzer-dist', version: '0.0.1'
