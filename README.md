@@ -3,6 +3,9 @@
 
 A non-opinionated User-Agent analysis proxy written in Java 8.
 
+## Introduction
+The purpose of this project is to encapsulate several popular useragent analysis frameworks for the JVM (and other languages) under a single facade/interface, allowing developers to easily move between frameworks/implementations in any case some becomes obsolete/updated or simplly doesn't quite fit the accuracy needs of the task at hand
+
 ## Key concepts
 - Provides both synchronous & fully asynchronous APIs.  
 - Pluggable architecture for both caching & processing(parsing) modules.
