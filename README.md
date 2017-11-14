@@ -123,5 +123,5 @@ AsyncUserAgentAnalyzer.builder()
 
 ## Future plans:
 - Add concurrency tests 
-- Add more cache implementations 
-- Add more parser implementations (suggestions are welcomed!)
+- Add more cache implementations - [guava](https://github.com/google/guava/wiki/CachesExplained)
+- Add more processor implementations - [woothee](https://github.com/woothee/woothee), [yauaa](https://github.com/nielsbasjes/yauaa)
