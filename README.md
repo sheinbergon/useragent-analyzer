@@ -3,11 +3,11 @@
 
 A non-opinionated User-Agent analysis proxy written in Java 8.
 
-## Key concepts :
+## Key concepts
 - Provides both synchronous & fully asynchronous APIs.  
-- Pluggable architecture for both caching & procesing(parsing) modules.
+- Pluggable architecture for both caching & processing(parsing) modules.
 
-## Getting Started :
+## Getting Started
 
 ### Dependencies
 
@@ -17,8 +17,7 @@ Note that this distribution jar relies on the user providing the j2v8 jar for th
 The following examples targets 64 bit linux execution environments, but other operating systems are
 supported as well. See [Maven Central](https://mvnrepository.com/artifact/com.eclipsesource.j2v8) for additional information. 
 
-#### Maven:
-
+#### Maven
 ```xml
 <dependencies>
     ...
@@ -36,8 +35,7 @@ supported as well. See [Maven Central](https://mvnrepository.com/artifact/com.ec
 </dependencies>
 
 ```
-#### Gradle :
-
+#### Gradle
 ```groovy
     compile group: 'com.eclipsesource.j2v8', name: 'j2v8_linux_x86_64', version: '4.8.0'
     compile group: 'org.sheinbergon', name: 'useragent-analyzer-dist', version: '0.0.1'
@@ -77,10 +75,10 @@ See Implementation Specs below
 ### Processors
 #### ua-paresr-js
 - Uses the popular javascript useragent parsing library [ua-parser.js](https://github.com/faisalman/ua-parser-js)
-- Javascript code is executed uses [J2V8](https://github.com/eclipsesource/J2V8)
+- Javascript code is executed using [J2V8](https://github.com/eclipsesource/J2V8)
 - Requires an explicit J2V8 dependency defintion per operating system/architecture. See supported architectures [here](https://mvnrepository.com/artifact/com.eclipsesource.j2v8)
-- As V8Engine are not thread-safe, it uses an object-pool to support concurrency with confiugrable allocation  timeout (milliseconds)
-- Async version also support executor pools size for V8 Engine allocation and ingestion
+- As V8Engine instances are not thread-safe, an object-pool is used to acheive thread-safety with concurrency, supporting confiugrable pool size & allocation timeout
+- Async version also supports executor pools size for V8 Engine allocation and ingestion
 ```java
 // Sync
 UserAgentAnalyzer.builder()
