@@ -1,5 +1,5 @@
 # useragent-analyzer
-[![Build Status](https://travis-ci.org/sheinbergon/governator-vault.svg?branch=master)](https://travis-ci.org/sheinbergon/useragent-analyzer) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/sheinbergon/governator-vault.svg?branch=master)](https://travis-ci.org/sheinbergon/useragent-analyzer) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Maven metadata URI](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/org/sheinbergon/useragent-analyzer/maven-metadata.xml.svg)](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/org/sheinbergon/useragent-analyzer)
 
 A non-opinionated User-Agent analysis proxy written in Java 8.
 
