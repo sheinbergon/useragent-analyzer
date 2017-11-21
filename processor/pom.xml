@@ -12,5 +12,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>uaparserjs</module>
+        <module>woothee</module>
     </modules>
 </project>

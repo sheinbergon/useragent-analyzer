@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>useragent-analyzer-processor</artifactId>
+        <groupId>org.sheinbergon</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <artifactId>useragent-analyzer-processor-woohtee</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <woothee.version>1.7.0</woothee.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>is.tagomor.woothee</groupId>
+            <artifactId>woothee-java</artifactId>
+            <version>${woothee.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sheinbergon</groupId>
+            <artifactId>useragent-analyzer-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sheinbergon</groupId>
+            <artifactId>useragent-analyzer-core</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
