@@ -20,7 +20,7 @@ public abstract class AsyncCache {
     public static abstract class Builder<C extends AsyncCache> {
         public abstract C build();
 
-        protected static AsyncCache wrap(final Cache cache) {
+        static AsyncCache wrap(final Cache cache) {
             return new AsyncCache() {
                 @Override
                 public CompletableFuture<Optional<UserAgentIngredients>> read(String raw) {

@@ -18,6 +18,9 @@ public class UserAgentIngredients {
     public enum Device {
         UNKNOWN,
         PC,
+        ROBOT,
+        SOFTWARE,
+        SET_TOP_BOX,
         MOBILE,
         TABLET,
         SMART_TV,
